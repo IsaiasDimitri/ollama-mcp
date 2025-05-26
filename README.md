@@ -1,5 +1,5 @@
 ## Sobre
-O projeto é uma implementação de um agente local consumindo um banco de dados postgres também local.  
+O projeto é uma implementação de um agente local consumindo um banco de dados postgres também local. Os dados são montados de forma aleatória, então se você ama carros, não me odeie se ver um "Toyota Golf" cadastrado.
 Escolhi o modelo qwen3:4b do ollama, que é um reasoning model, mas pode substituir por outro que seja compatível com o uso de tools.  
 A lista está aqui -> https://ollama.com/search?c=tools  
 Estou usando também o PydanticAI como framework para abstrair a criação do agente e o consumo do servidor MCP.
@@ -13,16 +13,16 @@ Docker
 Docker Compose  
 Ollama  
 
-> Crie um arquivo `.env` a partir de `.env.example` com os valores que forem convenientes.
-Ao criar o banco ele usará esses valores automáticamente, e já com 100 modelos de carros cadastrados.
+> IMPORTANTE: Crie um arquivo `.env` a partir de `.env.example` com os valores que forem convenientes.
+Ao criar o banco ele usará esses valores automáticamente, e já com 100 modelos de carros cadastrados. Se o arquivo .env não for criado, o projeto não funcionará como esperado.
 
 ### Preparação
 ```bash
 ollama pull qwen3:4b
 ollama ls   # checar que foi instalado
-python -m venv .venv
-source .venv/bin/acticvate
-pip install -r requirements.tx
+python -m venv .venv # use o python 3.12 ou suerior
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ### Execução
