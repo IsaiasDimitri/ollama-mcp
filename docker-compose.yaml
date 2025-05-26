@@ -1,5 +1,6 @@
 services:
   db: 
+    container_name: psql_db
     image: postgres:16-alpine 
     restart: always 
     environment:
@@ -7,13 +8,16 @@ services:
       POSTGRES_USER: ${DB_USER}        
       POSTGRES_PASSWORD: ${DB_PASSWORD} 
     ports:
-      - "5432:5432" 
+      - "5432:5432"
+    networks:
+      - mcp-net
     volumes:
-      - db_data:/var/lib/postgresql/data 
-    healthcheck:
-      test: ["CMD", "CMD-HEALTCHECK", "pg_isready", "-U", "${DB_USER}", "-d", "${DB_NAME}"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      - db_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+
 volumes:
   db_data: 
+
+networks:
+  mcp-net:
+    external: true

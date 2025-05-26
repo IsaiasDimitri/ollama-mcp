@@ -3,3 +3,4 @@ fastmcp
 sqlalchemy 
 psycopg2-binary 
 faker
+postgres-mcp==0.2.0
