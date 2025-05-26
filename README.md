@@ -28,7 +28,7 @@ pip install -r requirements.tx
 ### Execução
 ```bash
 # cria uma rede e inicia o banco
-docker network create mcp-net
+docker network create mcp-net # necessário para acessar o banco de dados de outro container
 docker compose up -d
 python main.py  # para sair, escreva 'quit'
 ```
@@ -41,3 +41,12 @@ e depois visualizar a tabela:
 ```bash
 \dt cars
 ```
+
+### Fontes
+Algumas das fontes que usei na minha breve pesquisa. O meu sincero agradecimnento a esse pessoal, em especial ao Bruno Rocha.
+Repo do Bruno Rocha: https://github.com/rochacbruno/python-base-ai/tree/main
+Outros repos e links que estudei:
+- https://github.com/Farzad-R/mcp-lab/blob/master/mcp_crash_course/src/servers/daily_news.py
+- https://github.com/modelcontextprotocol
+- https://ai.pydantic.dev/mcp/client/
+- https://ai.pydantic.dev/mcp/server/

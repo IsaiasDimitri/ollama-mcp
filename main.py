@@ -11,7 +11,6 @@ from dotenv import load_dotenv
 load_dotenv(".env")
 
 
-
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 model_name = os.environ.get("MODEL", "qwen3:4b")
 model = OpenAIModel(
@@ -25,15 +24,7 @@ password = os.environ.get("DB_PASSWORD", "password")
 DATABASE_URL = f"postgresql://{user}:{password}@{host}:5432/{db_name}"
 pgsql_server_mcp = MCPServerStdio(
     "docker",
-    args = [
-        "run",
-        "-i",
-        "--rm",
-        "--network",
-        "mcp-net",
-        "mcp/postgres",
-        DATABASE_URL
-    ]
+    args=["run", "-i", "--rm", "--network", "mcp-net", "mcp/postgres", DATABASE_URL],
 )
 
 s_prompt = f"""
@@ -71,11 +62,7 @@ SQL: `SELECT DISTINCT engine_type FROM cars;`
 
 Seja útil, preciso e sempre baseie sua resposta na tabela `cars`."""
 
-agent = Agent(
-    model,
-    system_prompt=s_prompt,
-    mcp_servers=[pgsql_server_mcp]
-)   
+agent = Agent(model, system_prompt=s_prompt, mcp_servers=[pgsql_server_mcp])
 
 
 async def invoke_agent(prompt: str) -> AgentRunResult:
@@ -93,9 +80,9 @@ async def main():
                 print("Exiting...")
                 break
             result = await invoke_agent(prompt)
-            print(result._output_tool_name)
-            print("-"*12)
+            print("-" * 12)
             print(result.output)
+            print("-" * 12)
 
 
 if __name__ == "__main__":
