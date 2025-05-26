@@ -1,0 +1,5 @@
+pydantic-ai-slim[openai,mcp]
+fastmcp
+sqlalchemy 
+psycopg2-binary 
+faker
